@@ -6,6 +6,19 @@ import (
   "github.com/gin-gonic/gin"
 )
 
+type Book struct {
+  ID string `json:"id"`
+  Title string `json:"title"`
+  Author string `json:"author"`
+  Quantity int `json:"quantity"`
+}
+
+var books = []Book{
+  {"1", "In Search of Lost Time", "Marcel Proust", 1},
+  {"2", "The Great Gatsby", "F. Scott", 2},
+  {"3", "War and Peace", "Leo Tolstoy", 3},
+}
+
 func main() {
   r := gin.Default()
   r.GET("/ping", func(c *gin.Context) {
