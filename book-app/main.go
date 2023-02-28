@@ -38,7 +38,7 @@ func bookDetail(ctx *gin.Context) {
 	book, err := getBookById(id)
 	if err != nil {
 		ctx.IndentedJSON(http.StatusNotFound, gin.H{"message": "book not found"})
-    return
+		return
 	}
 	ctx.IndentedJSON(http.StatusOK, book)
 }
@@ -52,10 +52,33 @@ func getBookById(id string) (*Book, error) {
 	return nil, errors.New("Book not found")
 }
 
+func bookCheckOut(ctx *gin.Context) {
+	id, ok := ctx.GetQuery("id")
+	if !ok {
+		ctx.IndentedJSON(http.StatusBadRequest, gin.H{"message": "id must be sent"})
+		return
+	}
+	book, err := getBookById(id)
+
+	if err != nil {
+		ctx.IndentedJSON(http.StatusNotFound, gin.H{"message": "book not found"})
+		return
+	}
+
+	if book.Quantity <= 0 {
+		ctx.IndentedJSON(http.StatusBadRequest, gin.H{"message": "out of stock"})
+		return
+	}
+
+	book.Quantity -= 1
+	ctx.IndentedJSON(http.StatusOK, book)
+}
+
 func main() {
 	r := gin.Default()
 	r.GET("/books", bookList)
 	r.POST("/book", bookCreate)
-  r.GET("/book/:id", bookDetail)
+	r.GET("/book/:id", bookDetail)
+	r.PATCH("/checkout", bookCheckOut)
 	r.Run("127.0.0.1:8000")
 }
