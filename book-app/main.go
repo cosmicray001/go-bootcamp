@@ -19,12 +19,12 @@ var books = []Book{
   {"3", "War and Peace", "Leo Tolstoy", 3},
 }
 
+func getBooks(ctx *gin.Context) {
+  ctx.IndentedJSON(http.StatusOK, books)
+}
+
 func main() {
   r := gin.Default()
-  r.GET("/ping", func(c *gin.Context) {
-    c.JSON(http.StatusOK, gin.H{
-      "message": "pong",
-    })
-  })
-  r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+  r.GET("/books", getBooks)
+  r.Run("127.0.0.1:8000")
 }
