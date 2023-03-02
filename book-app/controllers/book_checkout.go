@@ -7,7 +7,7 @@ import (
 	"github.com/cosmicray001/book-app/services"
 )
 
-func bookCheckOut(ctx *gin.Context) {
+func BookCheckOut(ctx *gin.Context) {
 	id, ok := ctx.GetQuery("id")
 	if !ok {
 		ctx.IndentedJSON(http.StatusBadRequest, gin.H{"message": "id must be sent"})

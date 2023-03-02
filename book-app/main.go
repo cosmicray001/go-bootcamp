@@ -23,11 +23,6 @@ func GetDb() []models.Book {
 }
 
 
-
-func bookList(ctx *gin.Context) {
-	ctx.IndentedJSON(http.StatusOK, books)
-}
-
 func bookCreate(ctx *gin.Context) {
 	var book Book
 	if err := ctx.BindJSON(&book); err != nil {
