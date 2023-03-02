@@ -2,12 +2,25 @@ package main
 
 import (
 	"errors"
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/cosmicray001/book-app/models"
 )
 
+var books []models.Book
 
+func init() {
+	books = append(books, models.Book{"1", "In Search of Lost Time", "Marcel Proust", 1})
+	books = append(books, models.Book{"2", "The Great Gatsby", "F. Scott", 2})
+	books = append(books, models.Book{"3", "War and Peace", "Leo Tolstoy", 3})
+	fmt.Println("db created!", len(books))
+}
+
+func GetDb() []models.Book {
+	return books
+}
 
 
 
