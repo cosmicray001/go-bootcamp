@@ -6,7 +6,7 @@ import (
 	"errors"
 )
 
-func getBookById(id string) (*models.Book, error) {
+func GetBookById(id string) (*models.Book, error) {
 	books := main.GetDb()
 	for idx, book := range books {
 		if book.ID == id {
