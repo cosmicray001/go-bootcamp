@@ -7,18 +7,9 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type Book struct {
-	ID       string `json:"id"`
-	Title    string `json:"title"`
-	Author   string `json:"author"`
-	Quantity int    `json:"quantity"`
-}
 
-var books = []Book{
-	{"1", "In Search of Lost Time", "Marcel Proust", 1},
-	{"2", "The Great Gatsby", "F. Scott", 2},
-	{"3", "War and Peace", "Leo Tolstoy", 3},
-}
+
+
 
 func bookList(ctx *gin.Context) {
 	ctx.IndentedJSON(http.StatusOK, books)
@@ -43,14 +34,7 @@ func bookDetail(ctx *gin.Context) {
 	ctx.IndentedJSON(http.StatusOK, book)
 }
 
-func getBookById(id string) (*Book, error) {
-	for idx, book := range books {
-		if book.ID == id {
-			return &books[idx], nil
-		}
-	}
-	return nil, errors.New("Book not found")
-}
+
 
 func bookCheckOut(ctx *gin.Context) {
 	id, ok := ctx.GetQuery("id")
