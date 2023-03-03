@@ -24,7 +24,7 @@ func BookCheckOut(ctx *gin.Context) {
 		ctx.IndentedJSON(http.StatusBadRequest, gin.H{"message": "out of stock"})
 		return
 	}
-
 	book.Quantity -= 1
-	ctx.IndentedJSON(http.StatusOK, book)
+
+	ctx.IndentedJSON(http.StatusOK, &book)
 }
